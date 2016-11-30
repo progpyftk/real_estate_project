@@ -1,0 +1,197 @@
+{% extends 'account/base.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% load thumbnail %}
+{% block title %} Imóveis a Venda Região dos Lagos {% endblock %}
+
+{% block content %}
+<!--//-->	
+<div class=" banner-buying">
+	<div class=" container">
+	<h3><span>Lor</span>em</h3> 
+	<!---->
+	<div class="menu-right">
+		 <ul class="menu">
+			<li class="item1"><a href="#"> Menu<i class="glyphicon glyphicon-menu-down"> </i> </a>
+			<ul class="cute">
+				<li class="subitem1"><a href="buy.html">Buy </a></li>
+				<li class="subitem2"><a href="buy.html">Rent </a></li>
+				<li class="subitem3"><a href="buy.html">Hostels </a></li>
+				<li class="subitem1"><a href="buy.html">Resale </a></li>
+				<li class="subitem2"><a href="loan.html">Home Loan</a></li>
+				<li class="subitem3"><a href="buy.html">Apartment </a></li>
+				<li class="subitem3"><a href="dealers.html">Dealers</a></li>
+			</ul>
+		</li>
+		</ul>
+	</div>
+	<div class="clearfix"> </div>
+		<!--initiate accordion-->
+		<script type="text/javascript">
+			$(function() {
+			    var menu_ul = $('.menu > li > ul'),
+			           menu_a  = $('.menu > li > a');
+			    menu_ul.hide();
+			    menu_a.click(function(e) {
+			        e.preventDefault();
+			        if(!$(this).hasClass('active')) {
+			            menu_a.removeClass('active');
+			            menu_ul.filter(':visible').slideUp('normal');
+			            $(this).addClass('active').next().stop(true,true).slideDown('normal');
+			        } else {
+			            $(this).removeClass('active');
+			            $(this).next().stop(true,true).slideUp('normal');
+			        }
+			    });
+			
+			});
+		</script>
+      		
+	</div>
+</div>
+<!--//header-->
+
+<div class="container">
+	<div class="buy-single-single">
+			<div class="col-md-9 single-box">
+       <div class=" buying-top">	
+			<div class="flexslider">
+  <ul class="slides">
+
+  {% for image in anuncio.imagens.all %}
+    <li data-thumb="{{ image.imagem.url }}">
+      <img src="{{ image.imagem.url }}"/>
+    </li>
+  {% endfor %}
+  </ul>
+</div>
+<!-- FlexSlider -->
+
+  <script defer src="{% static "js/jquery.flexslider.js" %}"></script>
+<link rel="stylesheet" href="{% static 'css/flexslider.css' %}" type="text/css" media="screen" />
+
+<script>
+// Can also be used with $(document).ready()
+$(window).load(function() {
+  $('.flexslider').flexslider({
+    animation: "slide",
+    controlNav: "thumbnails"
+  });
+});
+</script>
+</div>
+<div class="buy-sin-single">
+			<div class="col-sm-5 middle-side immediate">
+					     <h4>Possession: Immediate</h4>
+					     <p><span class="bath">Quartos </span>: <span class="two">{{anuncio.quartos}}</span></p>
+					     <p>  <span class="bath1">Banheiros </span>: <span class="two">{{anuncio.banheiros}}</span></p>
+					     <p><span class="bath2">Área Construída</span>: <span class="two">{{anuncio.area_construida}}</span></p>
+					     <p><span class="bath3">Área Total </span>:<span class="two"> {{anuncio.area_total}}</span></p>
+						 <p><span class="bath4">Data Construção</span> : <span class="two">{{anuncio.data_construcao}}</span></p>
+						 <p><span class="bath5">Preço </span>:<span class="two"> {{anuncio.preco_venda}}</span></p>				 
+						<div class="   right-side">
+							 <a href="contact.html" class="hvr-sweep-to-right more" >Contact Builder</a>     
+					 </div>
+					</div>
+					 <div class="col-sm-7 buy-sin">
+					 	<h4>Description</h4>
+					 	<p>{{anuncio.descricao}}</p>
+					 </div>
+					 <div class="clearfix"> </div>
+					</div>
+					 <div class="map-buy-single">
+					 	<h4>Neighborhood Info</h4>
+						 	<div class="map-buy-single1">
+								<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d37494223.23909492!2d103!3d55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x453c569a896724fb%3A0x1409fdf86611f613!2sRussia!5e0!3m2!1sen!2sin!4v1415776049771"></iframe>
+							
+						</div>
+					</div>
+					<div class="video-pre">
+						<h4>Video Presentation</h4>
+						<iframe src="https://player.vimeo.com/video/63931426"  webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+					</div>
+		</div>
+	
+
+			
+		
+		<div class="col-md-3">
+			<div class="single-box-right right-immediate">
+		     	<h4>Você pode gostar ...</h4>
+				{% for anuncio in anuncios_destaque %}
+				<div class="single-box-img">
+					<div class="box-img">
+						<a href="{{ anuncio.get_absolute_url }}"> <img class="img-responsive" src="{{ anuncio.imagem_principal.url }}" alt=""></a>	
+					</div>
+					<div class="box-text">
+						<p><a href="{{ anuncio.get_absolute_url }}">{{anuncio.titulo}}</a></p>
+						<a href="{{ anuncio.get_absolute_url }}" class="in-box">Mais informações</a>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				{% endfor %}
+				
+		 </div>
+			
+	  </div>
+		<div class="clearfix"> </div>
+		</div>
+	</div>
+
+<!---->
+<div class="container">
+	<div class="future">
+		<h3 >Anúncios em Destaque</h3>
+			<div class="content-bottom-in">
+					<ul id="flexiselDemo1">	
+						{% for anuncio in anuncios_destaque %}		
+						<li><div class="project-fur">
+								<a href="{{ anuncio.get_absolute_url }}"> <img class="img-responsive" src="{{ anuncio.imagem_principal.url }}" alt=""></a>	
+									<div class="fur">
+										<div class="fur1">
+		                                    <span class="fur-money">R$ {{anuncio.preco_venda}} </span>
+		                                    <h6 class="fur-name"><a href="single.html">{{anuncio.bairro}}r</a></h6>
+		                                   	<span>{{anuncio.cidade}}</span>
+                               			</div>
+			                            <div class="fur2">
+			                               	<span>{{anuncio.quartos}} quartos</span>
+			                             </div>
+									</div>					
+							</div></li>
+						{% endfor %}
+					</ul>
+					<script type="text/javascript">
+						$(window).load(function() {
+							$("#flexiselDemo1").flexisel({
+								visibleItems: 4,
+								animationSpeed: 1000,
+								autoPlay: true,
+								autoPlaySpeed: 3000,    		
+								pauseOnHover: true,
+								enableResponsiveBreakpoints: true,
+						    	responsiveBreakpoints: { 
+						    		portrait: { 
+						    			changePoint:480,
+						    			visibleItems: 1
+						    		}, 
+						    		landscape: { 
+						    			changePoint:640,
+						    			visibleItems: 2
+						    		},
+						    		tablet: { 
+						    			changePoint:768,
+						    			visibleItems: 3
+						    		}
+						    	}
+						    });
+						    
+						});
+			</script>
+			<script type="text/javascript" src="{% static 'js/jquery.flexisel.js'%}"></script>
+		</div>
+	</div>
+	
+</div>
+{% endblock %}
