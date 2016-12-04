@@ -16,6 +16,8 @@ class Anuncio(models.Model):
                         ('Casa', 'Casa'),
                         ('Comercial', 'Comercial'),
                         ('Fazenda/Sítio', 'Fazenda/Sítio'),)
+    CIDADES = (('Macaé', 'Macaé'), ('Rio das Ostras', 'Rio das Ostras'),
+               ('Campos', 'Campos'), ('Búzios', 'Búzios'))
 
     # Detalhes do usuario
     nome_contato = models.CharField(max_length=50)
@@ -27,7 +29,7 @@ class Anuncio(models.Model):
     # Detalhes do anúncio
     tipo_anuncio = models.CharField(max_length=40, choices=TIPOS_DE_ANUNCIO)
     created = models.DateField(auto_now_add=True)
-    titulo = models.CharField(max_length=50)
+    titulo = models.CharField(max_length=300)
     descricao = models.TextField(blank=True)
     slug = models.SlugField(max_length=200, blank=True)
     imagem_principal = models.ImageField(upload_to='anuncios/%Y/%m/%d')
@@ -46,7 +48,7 @@ class Anuncio(models.Model):
     # Localização do imovel
     pais = models.CharField(max_length=50)
     estado = models.CharField(max_length=50)
-    cidade = models.CharField(max_length=50)
+    cidade = models.CharField(max_length=50,choices=CIDADES)
     rua = models.CharField(max_length=50)
     bairro = models.CharField(max_length=50)
     numero = models.CharField(max_length=50)

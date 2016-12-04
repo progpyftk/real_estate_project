@@ -1,12 +1,12 @@
 from django.shortcuts import render
-from .models import Anuncio
-from .forms import ComprarBuscaForm, AlugarBuscaForm, AnuncioForm
+from .models import Anuncio, ImagensAnuncio
+from .forms import ComprarBuscaForm, AlugarBuscaForm, AnuncioForm, ImagensForm
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 import random
-
+from django.forms import modelformset_factory
 
 def busca_comprar(request):
     if request.method == 'POST':
@@ -127,14 +127,24 @@ def anuncio_aleatorio(numero_anuncios, tipo_anuncio):
 
 
 def anunciar_imovel(request):
+    ImageFormSet = modelformset_factory(ImagensAnuncio,
+                                        form=ImagensForm, extra=3)
     if request.method == 'POST':
-        form = AnuncioForm(request.POST)
-        if form.is_valid():
-            novo_anuncio = form.save(commit=False)
+        anuncioForm = AnuncioForm(request.POST, request.FILES)
+        formset = ImageFormSet(request.POST, request.FILES,
+                               queryset=ImagensAnuncio.objects.none())
+
+        if anuncioForm.is_valid() and formset.is_valid():
+            novo_anuncio = anuncioForm.save(commit=False)
             novo_anuncio.user = request.user
             novo_anuncio.save()
+
+            for form in formset.cleaned_data:
+                imagem = form['imagem']
+                photo = ImagensAnuncio(anuncio=novo_anuncio, imagem=imagem)
+                photo.save()
             return render(request, 'account/index.html')
     else:
-        print("Renderizei o GET")
-        form = AnuncioForm()
-    return render(request, 'imoveis/anunciar.html', {'form': form})
+        anuncioForm = AnuncioForm()
+        formset = ImageFormSet(queryset=ImagensAnuncio.objects.none())
+    return render(request, 'imoveis/anunciar.html', {'anuncioForm':anuncioForm,'formset':formset })

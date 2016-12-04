@@ -1,6 +1,10 @@
 {% extends 'account/base.html' %}
 {% load crispy_forms_tags %}
 {% load crispy_forms_filters %}
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
 
 {% block content %}
 <div class=" banner-buying">
@@ -9,7 +13,7 @@
 	<!---->
 	<div class="menu-right">
 		 <ul class="menu">
-			<li class="item1"><a href="#"> Menu<i class="glyphicon glyphicon-menu-down"> </i> </a>
+			<li class="item1"><a href="#">Menu<i class="glyphicon glyphicon-menu-down"> </i> </a>
 			<ul class="cute">
 				<li class="subitem1"><a href="buy.html">Buy </a></li>
 				<li class="subitem2"><a href="buy.html">Rent </a></li>
@@ -48,65 +52,277 @@
 </div>
 <!--//header-->
 <!--contact-->
+<div class="container">
+	<div class="login-right">
+	<h3><span></span>Crie seu anúncio</h3>
+	</div>
+		<div class="row">
+			<div class="col-sm-12">
 
+			<form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
+				<div class="panel panel-default">
+					<div class = "panel-heading">
+         				Informações de Contato 
+   					</div>
+   					<div class = "panel-body">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+							<input type="text" class="form-control" 
+							id="id_{{ anuncioForm.nome_contato.name }}" 
+							name="{{ anuncioForm.nome_contato.name }}"
+							value= "{{ request.user.first_name }} {{request.user.last_name}}"
+							placeholder="Nome">
+						</div>
+						<p class="help-text">{{ anuncioForm.nome_contato.help_text }} </p>
+						<br>
 
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+							<input type="text" class="form-control" 
+							id="id_{{ anuncioForm.email_contato.name }}" 
+							name="{{ anuncioForm.email_contato.name }}"
+							value="{{ request.user.email }} " 
+							placeholder="E-mail">
+						</div>
+						<p class="help-text">{{ anuncioForm.email_contato.help_text }} </p>
+						<br>
 
-			  <!-- Trigger the modal with a button -->
-			  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
-			  <!-- Modal -->
-			  <div class="modal fade" id="myModal" role="dialog">
-			    <div class="modal-dialog modal-lg">
-			    
-			      <!-- Modal content-->
-			      <div class="modal-content">
-			        <div class="modal-header">
-			          <button type="button" class="close" data-dismiss="modal">&times;</button>
-			          <h4 class="modal-title">Modal Header</h4>
-			        </div>
-			        <div class="modal-body">
-			         	<form action="." method="post">{% csrf_token %}
-							{{ form|crispy }}
-							<div class="form-info">	
-							 <label class="hvr-sweep-to-right">
-					           	<input type="submit" value="Sign Up">
-					         </label>
-					    	</div>
-						</form>
-			        </div>
-			        <div class="modal-footer">
-			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			        </div>
-			      </div>
-			      
-			    </div>
-			  </div>
-
-<div class="login-right">
-	<div class="container">
-
-		<h3>Anúncio</h3>
-		<div class="login-top">
-				<form action="." method="post">{% csrf_token %}
-					{{ form|crispy }}
-					<div class="form-info">	
-						 <label class="hvr-sweep-to-right">
-				           	<input type="submit" value="Sign Up">
-				         </label>
-				    </div>
-					</form>
-					<p>Already have a Real Home account? <a href="{% url 'register' %}">Login</a></p>
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-glyphicon glyphicon-phone"></i></span>
+							<input type="text" class="form-control" 
+							id="id_{{ anuncioForm.telefone_contato.name }}" 
+							name="{{ anuncioForm.telefone_contato.name }}"
+							placeholder="Telefone ou Celular">
+						</div>
+						<p class="help-text">{{ anuncioForm.telefone_contato.help_text }} </p>
+					</div>
 				</div>
-			
+
+				<div class="panel panel-default">
+					<div class = "panel-heading">
+         				Informações do Anúncio 
+   					</div>
+   					<div class = "panel-body">
+
+						<div class="input-group">
+							<span class="input-group-addon"><label>{{ anuncioForm.titulo.label }}</label></span> 
+							<input type="text" class="form-control" pattern="^([a-zA-Z0-9)$" required="required" maxlength="20" type="text"
+							id="id_{{ anuncioForm.titulo.name }}" 
+							name="{{ anuncioForm.titulo.name }}">
+						</div>
+						<p class="help-text">{{ anuncioForm.titulo.help_text }} </p>
+						<br>
+
+						<label class="control-label">{{anuncioForm.tipo_anuncio.label}}</label>
+						<select class="form-control control-label" 
+						id="id_{{ anuncioForm.tipo_anuncio.name }}" 
+						name="{{ anuncioForm.tipo_anuncio.name  }}">
+							<option value="" selected="selected">---------</option>
+							<option value="Venda">Venda</option>
+							<option value="Aluguel">Aluguel</option>
+							<option value="Aluguel e Venda">Aluguel e Venda</option>
+						</select>
+						<br>
+
+						<div class="input-group">
+							<input id="id_{{ anuncioForm.imagem_principal.name }}" 
+							name="{{ anuncioForm.imagem_principal.name }}" 
+							type="file">
+						</div>
+						<p>Esta será a imagem de capa do seu anúncio</p>
+						<br>
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+				  <div class = "panel-heading">
+				    Informações do Imóvei 
+				  </div>
+				  <div class="panel-body">
+				  	<div class="form-inline">   
+						<label class="control-label">{{anuncioForm.tipo_imovel.label}}</label>
+						<p>Selecione o tipo do seu imóvel</p>
+						<select class="form-control control-label" 
+						id="id_{{ anuncioForm.tipo_imovel.name }}" 
+						name="{{ anuncioForm.tipo_imovel.name }}">
+							<option value="" selected="selected">---------</option>
+							<option value="Casa">Casa</option>
+							<option value="Apartamento">Apartamento</option>
+							<option value="Comercial">Comercial</option>
+						</select>
+				    </div>  
+				    <br>
+				  	<div class="form-group">
+					    <label for="exampleTextarea">Descrição do imóvel</label>
+					    <p>Descreva com o máximo de detalhes o seu imóvel</p>
+					    <textarea class="form-control" id="id_{{ anuncioForm.descricao.name }}" name="{{ anuncioForm.descricao.name }}" rows="3"></textarea>
+  					</div>
+  					<br>
+  					<p><b>Características do imóvel</b></p>
+				    <div class="form-inline">
+				        <div class="input-group">
+				          <span class="input-group-addon"><label>{{ anuncioForm.quartos.label }}</label></span>
+				          <input class="form-control" 
+				          id="id_{{ anuncioForm.quartos.name }}" 
+				          name="{{ anuncioForm.quartos.name }}" 
+						  type="text"/>
+				        </div>         
+				        <div class="input-group">
+				          <span class="input-group-addon"><label>{{ anuncioForm.suites.label }}</label></span>
+				          <input class="form-control" 
+				          id="id_{{ anuncioForm.suites.name }}" 
+				          name="{{ anuncioForm.suites.name }}" 
+						  type="text"/>
+						</div>
+				        <div class="input-group">
+				          <span class="input-group-addon"><label>{{ anuncioForm.banheiros.label }}</label></span>
+				          <input class="form-control" 
+				          id="id_{{ anuncioForm.banheiros.name }}" 
+				          name="{{ anuncioForm.banheiros.name }}" 
+						  type="text"/>
+				        </div>
+				    </div>
+				    <br>  
+				    <div class="form-inline">
+				        <div class="col-xs-3 col-sm-3 input-group">
+				          <span class="input-group-addon"><label>{{ anuncioForm.area_construida.label }}</label></span>
+				          <input class="form-control" 
+				          id="id_{{ anuncioForm.area_construida.name }}" 
+				          name="{{ anuncioForm.area_construida.name }}" 
+						  type="text"/>
+				        </div>   
+				    </div>   
+				    <br>
+				    <div class="form-inline">   
+				        <div class="col-xs-3 col-sm-3 input-group">
+				          <span class="input-group-addon"><label>{{ anuncioForm.area_total.label }}</label></span>
+				          <input class="form-control" 
+				          id="id_{{ anuncioForm.area_total.name }}" 
+				          name="{{ anuncioForm.area_total.name }}" 
+						  type="text"/>
+						</div>
+				    </div>
+				    <br>
+				    <div class="form-inline">   
+				        <div class="col-xs-3 col-sm-3 input-group">
+				          <span class="input-group-addon"><label>Data de Construção</label></span>
+				          <input class="form-control"  data-validation="date" data-validation-format="yyyy-mm-dd"
+				          id="id_{{ anuncioForm.data_construcao.name }}" 
+				          name="{{ anuncioForm.data_construcao.name }}" 
+						  type="text"/>
+						</div>
+						<p>Insira o ano em que o imóvel foi construído</p>
+				    </div>
+				    <br>
+				    <p><b>Preço de Venda</b></p>
+				    <div class="form-inline">   
+				        <div class="input-group">
+				          <span class="input-group-addon"><label>R$</label></span>
+				          <input class="form-control" 
+				          id="id_{{ anuncioForm.preco_venda.name }}" 
+				          name="{{ anuncioForm.preco_venda.name }}" 
+						  type="text"/>
+						</div>
+					</div>
+					<br>
+					<p><b>Preço do Aluguel</b></p>
+				    <div class="form-inline">   
+				        <div class="input-group">
+				          <span class="input-group-addon"><label>R$</label></span>
+				          <input class="form-control" 
+				          id="id_{{ anuncioForm.preco_aluguel.name }}" 
+				          name="{{ anuncioForm.preco_aluguel.name }}" 
+						  type="text"/>
+						</div>
+					</div>
+					<br>
+
+					<p><b>Imagens do imóvel</b></p>
+					<p>Selecione algumas imagens do imóvel anuncioado</p>
+					<div class="input-group">
+						{{ formset.management_form }}
+			    		{% for form in formset %}
+			        		{{ form }}
+			    		{% endfor %}
+					</div>
+					<br>
+				</div>
+				</div>
+
+				<div class="panel panel-default">
+				  <div class = "panel-heading">
+				    Localização do Imóvel 
+				  </div>
+
+				  <div class="panel-body">
+
+				  	<div class="form-inline">   
+						<label class="control-label">{{anuncioForm.tipo_imovel.label}}</label>
+						<p>Selecione a cidade do seu imóvel</p>
+						<select class="form-control control-label" 
+						id="id_{{ anuncioForm.cidade.name }}" 
+						name="{{ anuncioForm.cidade.name }}">
+							<option value="" selected="selected">---------</option>
+							<option value="Macaé">Macaé</option>
+							<option value="Rio das Ostras">Rio das Ostras</option>
+							<option value="Búzios">Búzios</option>
+							<option value="Campos">Campos</option>
+							<option value="Cabo Frio">Cabo Frio</option>
+						</select>
+					</div>
+					<br>
+					<div class="input-group">
+			          <span class="input-group-addon"><label>{{ anuncioForm.bairro.label }}</label></span>
+			          <input class="form-control" 
+				          id="id_{{ anuncioForm.bairro.name }}" 
+				          name="{{ anuncioForm.bairro.name }}" 
+						  type="text"/>
+			        </div>
+			        <br>
+			        <div class="input-group">
+			          <span class="input-group-addon"><label>{{ anuncioForm.rua.label }}</label></span>
+			          <input class="form-control" 
+				          id="id_{{ anuncioForm.rua.name }}" 
+				          name="{{ anuncioForm.rua.name }}" 
+						  type="text"/>
+			        </div>
+			        <br>
+			        <div class="form-inline">
+				        <div class="input-group">
+				          <span class="input-group-addon"><label>{{ anuncioForm.cep.label }}</label></span>
+				          <input class="form-control" 
+					          id="id_{{ anuncioForm.cep.name }}" 
+					          name="{{ anuncioForm.cep.name }}" 
+							  type="text"/>
+				        </div>
+			        </div>
+			        </div>
+				    </div>  <!-- Panel Body -- >
+				  </div> <!-- Main Panel -->
+				<label>
+					<input class="btn"  type="submit" value="Submit">
+				</label>
+
+			</form>
+
+
+			{% for field in anuncioForm %}
+				<div>
+			 		{{field.label}}  {{field.value}}
+			 	</div>
+			{% endfor %}
+
+			{% for field in anuncioForm %}
+			    <div class="fieldWrapper">
+			    	{% if field.errors %}
+			        	{{ field.label_tag }} {{ field.errors }}
+			        {% endif %}
+			    </div>
+				{% endfor %}
+
+			</div>
+		</div>
 	</div>
 </div>
-<script>$(document).ready(function() {
-			    $('.has-popover').popover({'trigger':'hover'});
-			    $('.help-block').hide();
-			});
-</script>
 </div>
-
-<!--//contact-->
-
 {% endblock %}
