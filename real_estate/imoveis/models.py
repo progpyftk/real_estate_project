@@ -28,7 +28,6 @@ class Anuncio(models.Model):
 
     # Detalhes do anúncio
     tipo_anuncio = models.CharField(max_length=40, choices=TIPOS_DE_ANUNCIO)
-    created = models.DateField(auto_now_add=True)
     titulo = models.CharField(max_length=300)
     descricao = models.TextField(blank=True)
     slug = models.SlugField(max_length=200, blank=True)
@@ -41,7 +40,7 @@ class Anuncio(models.Model):
     area_construida = models.DecimalField(max_digits=9, decimal_places=2)
     area_total = models.DecimalField(max_digits=9, decimal_places=2)
     tipo_imovel = models.CharField(max_length=30, choices=TIPOS_DE_IMOVEIS)
-    data_construcao = models.DateField()
+    data_construcao = models.CharField(max_length=30)
     preco_venda = models.DecimalField(max_digits=9, decimal_places=2)
     preco_aluguel = models.DecimalField(max_digits=9, decimal_places=2)
 

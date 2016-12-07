@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'dashing',
     'account',
     'imoveis',
+    'dashboard',
 
     ]
 

@@ -24,7 +24,7 @@ from dashing.utils import router
 urlpatterns = [
 
 	url(r'^admin/', include(admin.site.urls)),
-    url(r'^dashboard/', include(router.urls)),
+    url(r'^dashboard/', include('dashboard.urls', namespace='dashboard')),
 	url(r'^account/', include('account.urls')),
     url(r'^imoveis/', include('imoveis.urls', namespace='imoveis')),
 	url('social-auth/', include('social.apps.django_app.urls', namespace='social')),

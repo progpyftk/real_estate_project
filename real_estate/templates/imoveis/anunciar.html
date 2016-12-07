@@ -103,12 +103,13 @@
          				Informações do Anúncio 
    					</div>
    					<div class = "panel-body">
-
+						
 						<div class="input-group">
 							<span class="input-group-addon"><label>{{ anuncioForm.titulo.label }}</label></span> 
 							<input type="text" class="form-control" pattern="^([a-zA-Z0-9)$" required="required" maxlength="20" type="text"
 							id="id_{{ anuncioForm.titulo.name }}" 
-							name="{{ anuncioForm.titulo.name }}">
+							name="{{ anuncioForm.titulo.name }}"
+							value="{{anuncioForm.titulo.value}}">
 						</div>
 						<p class="help-text">{{ anuncioForm.titulo.help_text }} </p>
 						<br>

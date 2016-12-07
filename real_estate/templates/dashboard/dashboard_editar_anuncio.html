@@ -1,0 +1,275 @@
+{% extends 'dashboard/dashboard_base.html' %}
+
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+
+<div class="container">
+	<div class="login-right">
+		<h3><span></span>Editar Anúncio</h3>
+	</div>
+		<div class="row">
+			<div class="col-sm-12">
+
+				<form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
+					<div class="panel panel-default">
+						<div class = "panel-heading">
+							Informações de Contato 
+						</div>
+						<div class = "panel-body">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+								<input type="text" class="form-control" 
+								id="id_{{ form.nome_contato.name }}" 
+								name="{{ form.nome_contato.name }}"
+								value= "{{ form.nome_contato.value }}"
+								placeholder="Nome">
+							</div>
+							<p class="help-text">{{ form.nome_contato.help_text }} </p>
+							<br>
+
+							<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+								<input type="text" class="form-control" 
+								id="id_{{ form.email_contato.name }}" 
+								name="{{ form.email_contato.name }}"
+								value="{{ form.email_contato.value }} " 
+								placeholder="E-mail">
+							</div>
+							<p class="help-text">{{ form.email_contato.help_text }} </p>
+							<br>
+
+							<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-glyphicon glyphicon-phone"></i></span>
+								<input type="text" class="form-control" 
+								id="id_{{ form.telefone_contato.name }}" 
+								name="{{ form.telefone_contato.name }}"
+								placeholder="Telefone ou Celular"
+								value="{{ form.telefone_contato.value }}">
+							</div>
+							<p class="help-text">{{ form.telefone_contato.help_text }} </p>
+						</div>
+					</div>
+
+					<div class="panel panel-default">
+						<div class = "panel-heading">
+							Informações do Anúncio 
+						</div>
+						<div class = "panel-body">
+							<div class="input-group">
+								<span class="input-group-addon"><label>{{ form.titulo.label }}</label></span> 
+								<input type="text" class="form-control" pattern="^([a-zA-Z0-9)$" required="required" maxlength="20" type="text"
+								id="id_{{ form.titulo.name }}" 
+								name="{{ form.titulo.name }}"
+								value="{{ form.titulo.value }}">
+							</div>
+							<p class="help-text">{{ form.titulo.help_text }} </p>
+							<br>
+
+							<label class="control-label">{{form.tipo_anuncio.label}}</label>
+							<select class="form-control control-label" 
+							id="id_{{ form.tipo_anuncio.name }}" 
+							name="{{ form.tipo_anuncio.name }}">
+								<option value="{{ form.tipo_anuncio.value }}" selected="selected">{{ form.tipo_anuncio.value }}</option>
+								<option value="Venda">Venda</option>
+								<option value="Aluguel">Aluguel</option>
+								<option value="Aluguel e Venda">Aluguel e Venda</option>
+							</select>
+							<br>
+
+							{{ form.imagem_principal }}
+							
+							<br>
+						</div>
+					</div>
+
+					<div class="panel panel-default">
+					  <div class = "panel-heading">
+					    Informações do Imóvei 
+					  </div>
+					  <div class="panel-body">
+					  	<div class="form-inline">   
+							<label class="control-label">{{form.tipo_imovel.label}}</label>
+							<p>Selecione o tipo do seu imóvel</p>
+							<select class="form-control control-label" 
+							id="id_{{ form.tipo_imovel.name }}" 
+							name="{{ form.tipo_imovel.name }}">
+								<option value="{{ form.tipo_imovel.value }}" selected="selected">{{ form.tipo_imovel.value }}</option>
+								<option value="Casa">Casa</option>
+								<option value="Apartamento">Apartamento</option>
+								<option value="Comercial">Comercial</option>
+							</select>
+					    </div>  
+					    <br>
+					  	<div class="form-group">
+						    <label for="exampleTextarea">Descrição do imóvel</label>
+						    <p>Descreva com o máximo de detalhes o seu imóvel</p>
+						    <textarea class="form-control" id="id_{{ form.descricao.name }}" name="{{ form.descricao.name }}" rows="3" >{{ form.descricao.value }}</textarea>
+							</div>
+							<br>
+							<p><b>Características do imóvel</b></p>
+					    <div class="form-inline">
+					        <div class="input-group">
+					          <span class="input-group-addon"><label>{{ form.quartos.label }}</label></span>
+					          <input class="form-control" 
+					          id="id_{{ form.quartos.name }}" 
+					          name="{{ form.quartos.name }}" 
+					          value="{{ form.quartos.value }}" 
+							  type="text"/>
+
+					        </div>         
+					        <div class="input-group">
+					          <span class="input-group-addon"><label>{{ form.suites.label }}</label></span>
+					          <input class="form-control" 
+					          id="id_{{ form.suites.name }}" 
+					          name="{{ form.suites.name }}" 
+					          value="{{ form.suites.value }}" 
+							  type="text"/>
+							</div>
+					        <div class="input-group">
+					          <span class="input-group-addon"><label>{{ form.banheiros.label }}</label></span>
+					          <input class="form-control" 
+					          id="id_{{ form.banheiros.name }}" 
+					          name="{{ form.banheiros.name }}" 
+					          value="{{ form.banheiros.value }}" 
+							  type="text"/>
+					        </div>
+					    </div>
+					    <br>  
+					    <div class="form-inline">
+					        <div class="col-xs-3 col-sm-3 input-group">
+					          <span class="input-group-addon"><label>{{ form.area_construida.label }}</label></span>
+					          <input class="form-control" 
+					          id="id_{{ form.area_construida.name }}" 
+					          name="{{ form.area_construida.name }}" 
+					          value="{{ form.area_construida.value }}" 					          
+							  type="text"/>
+					        </div>   
+					    </div>   
+					    <br>
+					    <div class="form-inline">   
+					        <div class="col-xs-3 col-sm-3 input-group">
+					          <span class="input-group-addon"><label>{{ form.area_total.label }}</label></span>
+					          <input class="form-control" 
+					          id="id_{{ form.area_total.name }}" 
+					          name="{{ form.area_total.name }}" 
+					          value="{{ form.area_total.value }}" 
+							  type="text"/>
+							</div>
+					    </div>
+					    <br>
+					    <div class="form-inline">   
+					        <div class="col-xs-3 col-sm-3 input-group">
+					          <span class="input-group-addon"><label>Data de Construção</label></span>
+					          <input class="form-control"  data-validation="date" data-validation-format="yyyy-mm-dd"
+					          id="id_{{ form.data_construcao.name }}" 
+					          name="{{ form.data_construcao.name }}" 
+					          value="{{ form.data_construcao.value }}" 
+							  type="text"/>
+							</div>
+							<p>Insira o ano em que o imóvel foi construído</p>
+					    </div>
+					    <br>
+					    <p><b>Preço de Venda</b></p>
+					    <div class="form-inline">  
+					    	<div class="col-xs-3 col-sm-3 input-group"> 
+						        <div class="input-group">
+						          <span class="input-group-addon"><label>R$</label></span>
+						          <input class="form-control" 
+						          id="id_{{ form.preco_venda.name }}" 
+						          name="{{ form.preco_venda.name }}" 
+						          value="{{ form.preco_venda.value }}"
+								  type="text"/>
+								</div>
+							</div>
+						</div>
+						<br>
+						<p><b>Preço do Aluguel</b></p>
+					    <div class="form-inline"> 
+					    	<div class="col-xs-3 col-sm-3 input-group"> 
+						        <div class="input-group">
+						          <span class="input-group-addon"><label>R$</label></span>
+						          <input class="form-control" 
+						          id="id_{{ form.preco_aluguel.name }}" 
+						          name="{{ form.preco_aluguel.name }}" 
+						          value="{{ form.preco_aluguel.value }}"
+								  type="text"/>
+								</div>
+							</div>
+						</div>
+						<br>
+
+
+						<!--  Falta Implementar, é só carregar as imagens e mandar pra cá -->
+						<p><b>Imagens do imóvel</b></p>
+						<p>Selecione algumas imagens do imóvel formado</p>
+						<div class="input-group">
+							{{ formset.management_form }}
+				    		{% for form in formset %}
+				        		{{ form }}
+				    		{% endfor %}
+						</div>
+						<br>
+					</div>
+					</div>
+
+					<div class="panel panel-default">
+					  <div class = "panel-heading">
+					    Localização do Imóvel 
+					  </div>
+					  <div class="panel-body">
+					  	<div class="form-inline">   
+							<label class="control-label">{{form.cidade.label}}</label>
+							<p>Selecione a cidade do seu imóvel</p>
+							<select class="form-control control-label" 
+							id="id_{{ form.cidade.name }}" 
+							name="{{ form.cidade.name }}">
+								<option value="{{ form.cidade.value }}" selected="selected">{{ form.cidade.value }}</option>
+								<option value="Macaé">Macaé</option>
+								<option value="Rio das Ostras">Rio das Ostras</option>
+								<option value="Búzios">Búzios</option>
+								<option value="Campos">Campos</option>
+								<option value="Cabo Frio">Cabo Frio</option>
+							</select>
+						</div>
+						<br>
+						<div class="input-group">
+				          <span class="input-group-addon"><label>{{ form.bairro.label }}</label></span>
+				          <input class="form-control" 
+					          id="id_{{ form.bairro.name }}" 
+					          name="{{ form.bairro.name }}" 
+					          value="{{ form.bairro.value }}" 
+							  type="text"/>
+				        </div>
+				        <br>
+				        <div class="input-group">
+				          <span class="input-group-addon"><label>{{ form.rua.label }}</label></span>
+				          <input class="form-control" 
+					          id="id_{{ form.rua.name }}" 
+					          name="{{ form.rua.name }}"
+					          value="{{ form.rua.value }}"  
+							  type="text"/>
+				        </div>
+				        <br>
+				        <div class="form-inline">
+					        <div class="input-group">
+					          <span class="input-group-addon"><label>{{ form.cep.label }}</label></span>
+					          <input class="form-control" 
+						          id="id_{{ form.cep.name }}" 
+						          name="{{ form.cep.name }}" 
+						          value="{{ form.cep.value }}"
+								  type="text"/>
+					        </div>
+				        </div>
+				        </div>
+					    </div>  <!-- Panel Body -- >
+					  </div> <!-- Main Panel -->
+					<label>
+						<input class="btn"  type="submit" value="Submit">
+					</label>
+				</form>
+			</div>
+		</div>
+</div>
+{% endblock %}

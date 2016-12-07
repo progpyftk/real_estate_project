@@ -19,8 +19,12 @@ Busca de imóveis e resultado de busca
 Criação de Anúncios
 - Implementação quase pronta. Faltam alguns testes.
 
+
+
 Próximos passos:
-- Finalizar o cadastro do anúncio e realizar testes
+- Desenhar a área do usuário, onde será possível gerenciar os anúncios criados (deletar, editar, criar um novo ...)
 - Criar os textos do layout
 
+Etapas Concluidas
+- Finalizar o cadastro do anúncio e realizar testes
  
