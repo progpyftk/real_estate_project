@@ -108,9 +108,7 @@
 							<span class="input-group-addon"><label>{{ anuncioForm.titulo.label }}</label></span> 
 							<input type="text" class="form-control" pattern="^([a-zA-Z0-9)$" required="required" maxlength="20" type="text"
 							id="id_{{ anuncioForm.titulo.name }}" 
-							name="{{ anuncioForm.titulo.name }}"
-							value="{{anuncioForm.titulo.value}}">
-						</div>
+							name="{{ anuncioForm.titulo.name }}">						</div>
 						<p class="help-text">{{ anuncioForm.titulo.help_text }} </p>
 						<br>
 
@@ -186,7 +184,7 @@
 				    <br>  
 				    <div class="form-inline">
 				        <div class="col-xs-3 col-sm-3 input-group">
-				          <span class="input-group-addon"><label>{{ anuncioForm.area_construida.label }}</label></span>
+				          <span class="input-group-addon"><label style="width:130px;">{{ anuncioForm.area_construida.label }}</label></span>
 				          <input class="form-control" 
 				          id="id_{{ anuncioForm.area_construida.name }}" 
 				          name="{{ anuncioForm.area_construida.name }}" 
@@ -196,7 +194,7 @@
 				    <br>
 				    <div class="form-inline">   
 				        <div class="col-xs-3 col-sm-3 input-group">
-				          <span class="input-group-addon"><label>{{ anuncioForm.area_total.label }}</label></span>
+				          <span class="input-group-addon"><label style="width:130px;">{{ anuncioForm.area_total.label }}</label></span>
 				          <input class="form-control" 
 				          id="id_{{ anuncioForm.area_total.name }}" 
 				          name="{{ anuncioForm.area_total.name }}" 
@@ -206,7 +204,7 @@
 				    <br>
 				    <div class="form-inline">   
 				        <div class="col-xs-3 col-sm-3 input-group">
-				          <span class="input-group-addon"><label>Data de Construção</label></span>
+				          <span class="input-group-addon"><label style="width:130px;">Data de Construção</label></span>
 				          <input class="form-control"  data-validation="date" data-validation-format="yyyy-mm-dd"
 				          id="id_{{ anuncioForm.data_construcao.name }}" 
 				          name="{{ anuncioForm.data_construcao.name }}" 
@@ -218,7 +216,7 @@
 				    <p><b>Preço de Venda</b></p>
 				    <div class="form-inline">   
 				        <div class="input-group">
-				          <span class="input-group-addon"><label>R$</label></span>
+				          <span class="input-group-addon"><label style="width:60px;">R$</label></span>
 				          <input class="form-control" 
 				          id="id_{{ anuncioForm.preco_venda.name }}" 
 				          name="{{ anuncioForm.preco_venda.name }}" 
@@ -229,7 +227,7 @@
 					<p><b>Preço do Aluguel</b></p>
 				    <div class="form-inline">   
 				        <div class="input-group">
-				          <span class="input-group-addon"><label>R$</label></span>
+				          <span class="input-group-addon"><label style="width:60px;">R$</label></span>
 				          <input class="form-control" 
 				          id="id_{{ anuncioForm.preco_aluguel.name }}" 
 				          name="{{ anuncioForm.preco_aluguel.name }}" 

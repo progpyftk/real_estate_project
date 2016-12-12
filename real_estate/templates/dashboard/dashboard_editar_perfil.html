@@ -1,0 +1,31 @@
+{% extends 'dashboard/dashboard_base.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-3 col-lg-7">
+		<br>
+		<h1>Edite seu perfil</h1>
+		<br>
+		<form action="." method="post" enctype="multipart/form-data">
+			<div class="panel panel-default">
+				<div class = "panel-heading">
+					Informações de Contato 
+				</div>
+				<div class = "panel-body">
+				{{ user_form|crispy }}
+				{{ perfil_form|crispy }}
+				{% csrf_token %}
+				<p><input class="btn btn-primary" type="submit" value="Salvar">
+				<a href="{% url 'dashboard:dashboard_editar_perfil' %}" class="btn btn-default">Voltar</a></p>	
+				</div>
+			</div>
+
+		</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

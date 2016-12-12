@@ -27,15 +27,23 @@ Criação de Anúncios
 - Deletar um anúncio, pronto.
 - Editar um anúncio, pronto.
 
-
 Próximos passos:
-- Editar o perfil do usuário, para isso vou ter que criar um model, com telefone, cidade, sexo e idade. Mas que será feito na edição e não no registro.
-- Criar a home da área do usuário
+- Verificar em casa o login utilizando facebook e gmail, e depois acertar a criação do perfil.
 - Criar os textos do layout
+- Criar o sistema de favoritos (novo app)
+- Criar o sistema de visualizações 
 
 Etapas Concluidas
+- Criar a home da área do usuário
+- Editar o perfil do usuário, para isso vou ter que criar um model, com telefone, cidade, sexo e idade. Mas que será feito na edição e não no registro.
 - Finalizar o cadastro do anúncio e realizar testes
 - Desenhar a área do usuário, onde será possível gerenciar os anúncios criados (deletar, editar, criar um novo ...)
 - Sistema de edição, deletar e visualizar os anúncios do usuário
+- Na área do usuário, na edição do anúncio falta implementar as imagens secundárias do anúncio
+- Na área do usuário, criar um link para o anúncio ao clicar na foto e colocar um olho no actions
 
- 
+
+Fazendo:
+- Criar sistema de favoritos
+
+

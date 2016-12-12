@@ -7,11 +7,11 @@ from django.contrib import messages
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 from social.exceptions import AuthException
 from django.contrib.auth.models import User
+from .models import Perfil
 
 
 def check_email(request, backend, details, uid, user=None, *args, **kwargs):
 	if backend.name == 'google-oauth2':
-
 
 		# verifica se é um usuário jah existente pelo google, e que apenas vai fazer o login
 		if uid and user:
@@ -30,5 +30,15 @@ def check_email(request, backend, details, uid, user=None, *args, **kwargs):
 				#return HttpResponseRedirect(reverse('login'))
 				print("LEVANTEI A EXCEPTION")
 				raise AuthException(backend, 'Not unique email address.')
+			else:
+				# siginifca q o user será registrado, logo podemos criar o seu perfil
+				perfil = Perfil.objects.create(user=user)
+				print("CRIANDO PERFIL")
+				perfil.save()
+
+
+
+
+
 
 	

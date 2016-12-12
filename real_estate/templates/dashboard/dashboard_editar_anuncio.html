@@ -1,5 +1,4 @@
 {% extends 'dashboard/dashboard_base.html' %}
-
 {% load crispy_forms_tags %}
 {% load crispy_forms_filters %}
 
@@ -66,6 +65,10 @@
 							</div>
 							<p class="help-text">{{ form.titulo.help_text }} </p>
 							<br>
+
+							
+							<div>{{formset|crispy}}</div>
+							
 
 							<label class="control-label">{{form.tipo_anuncio.label}}</label>
 							<select class="form-control control-label" 
@@ -137,39 +140,39 @@
 					        </div>
 					    </div>
 					    <br>  
-					    <div class="form-inline">
-					        <div class="col-xs-3 col-sm-3 input-group">
-					          <span class="input-group-addon"><label>{{ form.area_construida.label }}</label></span>
-					          <input class="form-control" 
-					          id="id_{{ form.area_construida.name }}" 
-					          name="{{ form.area_construida.name }}" 
-					          value="{{ form.area_construida.value }}" 					          
+						<div class="form-inline">
+						    <div class="col-xs-3 col-sm-3 input-group">
+						      <span class="input-group-addon"><label style="width:130px;">{{ form.area_construida.label }}</label></span>
+						      <input class="form-control" 
+						      id="id_{{ form.area_construida.name }}" 
+						      name="{{ form.area_construida.name }}" 
+						      value="{{ form.area_construida.value }}" 					          
 							  type="text"/>
-					        </div>   
-					    </div>   
-					    <br>
-					    <div class="form-inline">   
-					        <div class="col-xs-3 col-sm-3 input-group">
-					          <span class="input-group-addon"><label>{{ form.area_total.label }}</label></span>
-					          <input class="form-control" 
-					          id="id_{{ form.area_total.name }}" 
-					          name="{{ form.area_total.name }}" 
-					          value="{{ form.area_total.value }}" 
+						    </div>   
+						</div>   
+						<br>
+						<div class="form-inline">   
+						    <div class="col-xs-3 col-sm-3 input-group">
+						      <span class="input-group-addon"><label style="width:130px;">{{ form.area_total.label }}</label></span>
+						      <input class="form-control" 
+						      id="id_{{ form.area_total.name }}" 
+						      name="{{ form.area_total.name }}" 
+						      value="{{ form.area_total.value }}" 
 							  type="text"/>
 							</div>
-					    </div>
-					    <br>
-					    <div class="form-inline">   
-					        <div class="col-xs-3 col-sm-3 input-group">
-					          <span class="input-group-addon"><label>Data de Construção</label></span>
-					          <input class="form-control"  data-validation="date" data-validation-format="yyyy-mm-dd"
-					          id="id_{{ form.data_construcao.name }}" 
-					          name="{{ form.data_construcao.name }}" 
-					          value="{{ form.data_construcao.value }}" 
+						</div>
+						<br>
+						<div class="form-inline">   
+						    <div class="col-xs-3 col-sm-3 input-group">
+						      <span class="input-group-addon"><label style="width:130px;">Data de Construção</label></span>
+						      <input class="form-control"  data-validation="date" data-validation-format="yyyy-mm-dd"
+						      id="id_{{ form.data_construcao.name }}" 
+						      name="{{ form.data_construcao.name }}" 
+						      value="{{ form.data_construcao.value }}" 
 							  type="text"/>
 							</div>
 							<p>Insira o ano em que o imóvel foi construído</p>
-					    </div>
+						</div>
 					    <br>
 					    <p><b>Preço de Venda</b></p>
 					    <div class="form-inline">  
@@ -265,10 +268,13 @@
 				        </div>
 					    </div>  <!-- Panel Body -- >
 					  </div> <!-- Main Panel -->
+					 <br>
 					<label>
-						<input class="btn"  type="submit" value="Submit">
+						<input class="btn btn-primary"  type="submit" value="Atualizar Anúncio">
+						<a href="{% url 'dashboard:dashboard_meus_anuncios' %}" class="btn btn-default">Voltar</a>			
 					</label>
 				</form>
+				<br>
 			</div>
 		</div>
 </div>

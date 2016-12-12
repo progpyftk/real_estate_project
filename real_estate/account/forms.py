@@ -6,6 +6,7 @@ from django.core.validators import RegexValidator
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.conf import settings
+from .models import Perfil
 
 
 class LoginForm(forms.Form):
@@ -97,3 +98,11 @@ class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'email')
+
+class PerfilEditForm(forms.ModelForm):
+    class Meta:
+        model = Perfil
+        fields = ('cidade', 'estado', 'telefone', 'foto', 'data_nascimento')
+
+
+

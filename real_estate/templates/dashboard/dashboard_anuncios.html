@@ -8,6 +8,7 @@
 		<h1>Olá, {{ request.user.first_name }}</h1>
 	</div>
     <div class="row col-md-12 col-md-offset-0 custyle">
+     <div class="table-responsive">
       <table class="table table-striped custab">
         <thead>
             <tr>
@@ -23,10 +24,10 @@
             </tr>
         </thead>
                 {% for anuncio in anuncios %}
-                <tr >
+                <tr>
                     <td>
                         <div class="embed-responsive embed-responsive-16by9">
-                            <img class="embed-responsive-item" src="{{anuncio.imagem_principal.url}}">
+                            <a href="{{ anuncio.get_absolute_url }}"><img class="embed-responsive-item" src="{{anuncio.imagem_principal.url}}"></a>
                         </div>
                     </td>
                     <td>Falta</td>
@@ -72,25 +73,20 @@
                           </div> <!-- /.modal-main -->
                           <!-- Fim do Deletar-->
                         </p>
-                    </td>
-                    <!-- Editar o anuncio -->
-                    <td><p data-placement="top" data-toggle="tooltip" title="Edit">
+                        <!-- Editar o anuncio -->
+                        <p data-placement="top" data-toggle="tooltip" title="Edit">
                           <a href="{% url 'dashboard:dashboard_editar_anuncio' anuncio.id %}">
                           <button type="submit" class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit">
                             <span class="glyphicon glyphicon-pencil">
-                              
                             </span>
-                          </button></p>
+                          </button>
+                        </p>
                     </td>
                 </tr>
                 {% endfor %}
       </table>
+     </div>
     </div>
 </div>
-
-
-
- 
-
 
 {% endblock %}

@@ -6,7 +6,7 @@ from .forms import LoginForm, UserRegistrationForm
 from django import views
 from django.contrib.auth.models import User
 from django.contrib import messages
-
+from .models import Perfil
 
 
 def user_login(request):
@@ -31,6 +31,8 @@ def index(request):
 def base(request):
 	return render(request, 'account/base.html')
 
+
+# se o usuário fizer o login via face ou gmail a criacao do perfil é no pipeline deles.
 def register(request):
 	if request.method == 'POST':
 		form = UserRegistrationForm(request.POST)
@@ -40,6 +42,7 @@ def register(request):
 										email=form.cleaned_data['email'],
 										first_name=form.cleaned_data['first_name'],
 										last_name=form.cleaned_data['last_name'])
+			perfil = Perfil.objects.create(user=user)
 			return render(request, 'account/register_sucess.html')
 	else:
 		print("Renderizei o GET")
